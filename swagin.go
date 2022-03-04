@@ -31,6 +31,15 @@ func New(swagger *swagger.Swagger) *SwaGin {
 	return f
 }
 
+func NewFromEngine(engine *gin.Engine, swagger *swagger.Swagger) *SwaGin {
+	f := &SwaGin{Engine: engine, Swagger: swagger, Routers: make(map[string]map[string]*router.Router), subApps: make(map[string]*SwaGin)}
+	f.SetHTMLTemplate(template.Must(template.ParseFS(templates, "templates/*.html")))
+	if swagger != nil {
+		swagger.Routers = f.Routers
+	}
+	return f
+}
+
 func (g *SwaGin) Mount(path string, app *SwaGin) {
 	app.rootPath = path
 	app.Engine = g.Engine
