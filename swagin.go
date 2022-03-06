@@ -135,6 +135,21 @@ func (g *SwaGin) init() {
 			"redoc_options": options,
 		})
 	})
+	g.Engine.GET(g.fullPath(g.Swagger.RapiDocUrl), func(c *gin.Context) {
+		options := `{}`
+		if g.Swagger.RapiDocOptions != nil {
+			data, err := json.Marshal(g.Swagger.RapiDocOptions)
+			if err != nil {
+				panic(err)
+			}
+			options = string(data)
+		}
+		c.HTML(http.StatusOK, "rapidoc.html", gin.H{
+			"openapi_url":     g.fullPath(g.Swagger.OpenAPIUrl),
+			"title":           g.Swagger.Title,
+			"rapidoc_options": options,
+		})
+	})
 	g.Swagger.BuildOpenAPI()
 }
 func (g *SwaGin) initRouters() {

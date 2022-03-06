@@ -51,7 +51,7 @@ func main() {
 
 	port := ":8084"
 
-	fmt.Printf("Now you can visit http://127.0.0.1%v/docs or http://127.0.0.1%v/redoc to see the api docs. Have fun!", port, port)
+	fmt.Printf("Now you can visit http://127.0.0.1%v/docs, http://127.0.0.1%v/redoc or http://127.0.0.1%v/rapidoc to see the api docs. Have fun!", port, port, port)
 	if err := app.Run(port); err != nil {
 		panic(err)
 	}

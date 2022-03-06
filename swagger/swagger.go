@@ -30,6 +30,7 @@ type Swagger struct {
 	Version        string
 	DocsUrl        string
 	RedocUrl       string
+	RapiDocUrl     string
 	OpenAPIUrl     string
 	Routers        map[string]map[string]*router.Router
 	Servers        openapi3.Servers
@@ -39,10 +40,11 @@ type Swagger struct {
 	OpenAPI        *openapi3.T
 	SwaggerOptions map[string]interface{}
 	RedocOptions   map[string]interface{}
+	RapiDocOptions map[string]interface{}
 }
 
 func New(title, description, version string, options ...Option) *Swagger {
-	swagger := &Swagger{Title: title, Description: description, Version: version, DocsUrl: "/docs", RedocUrl: "/redoc", OpenAPIUrl: "/openapi.json"}
+	swagger := &Swagger{Title: title, Description: description, Version: version, DocsUrl: "/docs", RedocUrl: "/redoc", RapiDocUrl: "/rapidoc", OpenAPIUrl: "/openapi.json"}
 	for _, option := range options {
 		option(swagger)
 	}
